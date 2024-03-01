@@ -46,6 +46,25 @@ exports.findId = async (req, res) => {
   }
 };
 
+exports.findByUsername = async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    // Busca un cliente por nombre de usuario y popula las transacciones
+    const client = await Client.findOne({ username: username }).populate("transactions");
+
+    if (client) {
+      res.status(200).json({ state: true, data: client });
+    } else {
+      res.status(404).json({
+        state: false,
+        error: `Cliente con nombre de usuario '${username}' no encontrado.`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({ state: false, error: err.message });
+  }
+};
 exports.deleteClient = async (req, res) => {
   const { id } = req.params;
   try {

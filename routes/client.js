@@ -11,7 +11,7 @@ const check = require("../middleware/auth");
 
 routes.get("/",  findAll);
 routes.get("/:id", findId);
-routes.post("/", check.auth, save);
+routes.post("/",  save);
 
 routes.patch("/:id",  update);
 routes.delete("/:id",  deleteClient);

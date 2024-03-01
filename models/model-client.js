@@ -19,6 +19,19 @@ const SchemaClient = new Schema({
     type: String,
     required: false,
   },
+
+
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+
+  
   transactions: [
     {
       type: Schema.Types.ObjectId,

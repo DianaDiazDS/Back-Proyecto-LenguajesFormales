@@ -1,4 +1,7 @@
-const User = require("../models/model-user");
+// const User = require("../models/model-user");
+const User = require("../models/model-client");
+
+
 const jwt = require("../services/jwt");
 
 exports.validate = async (req, res) => {
@@ -8,6 +11,7 @@ exports.validate = async (req, res) => {
     password: password,
   });
   const token = jwt.createToken(user);
+  
   if (!user) {
     res.status(404).json({
       state: false,
@@ -15,7 +19,8 @@ exports.validate = async (req, res) => {
     });
   } else {
     try {
-      res.status(200).json({ state: true, data: "Usuario encontrado", token });
+      //aqui le envie la infromacion para tomar el id,postman
+      res.status(200).json({ state: true,data: user ,token });
     } catch (err) {
       res.status(500).json({ state: false, error: err.message });
     }
