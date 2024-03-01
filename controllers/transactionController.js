@@ -71,7 +71,7 @@ exports.update = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const data = await Transaction.find({});
+    const data = await Transaction.find({}).populate("client");
     res.status(200).json({ state: true, data: data });
   } catch (err) {
     res.status(500).json({ state: false, error: err.message });
@@ -81,7 +81,7 @@ exports.findAll = async (req, res) => {
 exports.findId = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await Transaction.find({ id: id });
+    const data = await Transaction.find({ id: id }).populate("client");
     res.status(200).json({ state: true, data: data });
   } catch (err) {
     res.status(500).json({ state: false, error: err.message });
