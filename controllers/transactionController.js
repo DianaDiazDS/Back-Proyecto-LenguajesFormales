@@ -87,7 +87,15 @@ exports.findId = async (req, res) => {
     res.status(500).json({ state: false, error: err.message });
   }
 };
-
+exports.findByCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const data = await Transaction.find({ category: category });
+    res.status(200).json({ state: true, data: data });
+  } catch (err) {
+    res.status(500).json({ state: false, error: err.message });
+  }
+};
 exports.deleteTransaction = async (req, res) => {
   const { id } = req.params;
   try {
