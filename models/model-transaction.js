@@ -29,7 +29,7 @@ const Schematransaction = new Schema({
 
   paymentDate: {
     type: Date,
-    required: true,
+    required: false,
   },
   endDate: {
     type: Date,

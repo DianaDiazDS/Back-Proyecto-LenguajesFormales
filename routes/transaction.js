@@ -5,6 +5,7 @@ const {
   findAll,
   findId,
   findByCategory,
+  findByStatus,
   deleteTransaction,
 } = require("../controllers/transactionController");
 // const check = require("../middleware/auth");
@@ -12,6 +13,9 @@ const {
 routes.get("/",  findAll);
 routes.get("/:id", findId);
 routes.get("/categoria/:category", findByCategory);
+routes.get("/status/:status", findByStatus);
+
+
 
 
 routes.post("/", save);
