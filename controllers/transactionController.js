@@ -1,3 +1,4 @@
+const { monthsShort } = require("moment");
 const Transaction = require("../models/model-transaction");
 
 exports.save = async (req, res) => {
@@ -87,6 +88,8 @@ exports.findId = async (req, res) => {
     res.status(500).json({ state: false, error: err.message });
   }
 };
+
+
 exports.findByCategory = async (req, res) => {
   const { category } = req.params;
   try {
@@ -105,6 +108,22 @@ exports.findByStatus = async (req, res) => {
     res.status(500).json({ state: false, error: err.message });
   }
 };
+
+exports.findByAmountRange = async (req, res) => {
+  const { minAmount, maxAmount } = req.params;
+  try {
+   
+    const min = parseFloat(minAmount);
+    const max = parseFloat(maxAmount);
+
+    const data = await Transaction.find({ amount: { $gte: min, $lte: max } });
+
+    res.status(200).json({ state: true, data: data });
+  } catch (err) {
+    res.status(500).json({ state: false, error: err.message });
+  }
+};
+
 
 exports.findByStatus = async (req, res) => {
   const { status } = req.params;
