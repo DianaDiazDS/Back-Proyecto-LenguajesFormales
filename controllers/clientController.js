@@ -29,7 +29,10 @@ exports.update = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
+    
     const data = await Client.find({});
+    
+
     res.status(200).json({ state: true, data: data });
   } catch (err) {
     res.status(500).json({ state: false, error: err.message });

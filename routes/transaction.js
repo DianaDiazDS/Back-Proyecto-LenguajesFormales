@@ -14,7 +14,9 @@ const {
 routes.get("/",  findAll);
 routes.get("/:id", findId);
 routes.get("/categoria/:category", findByCategory);
+// routes.get("/status/:status/:id", findByStatus);
 routes.get("/status/:status", findByStatus);
+
 routes.get("/amount/:minAmount/:maxAmount", findByAmountRange);
 
 

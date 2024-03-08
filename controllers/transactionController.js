@@ -93,21 +93,21 @@ exports.findId = async (req, res) => {
 exports.findByCategory = async (req, res) => {
   const { category } = req.params;
   try {
-    const data = await Transaction.find({ category: category });
+    const data = await Transaction.find({ category: category }).populate("client");
     res.status(200).json({ state: true, data: data });
   } catch (err) {
     res.status(500).json({ state: false, error: err.message });
   }
 };
-exports.findByStatus = async (req, res) => {
-  const { status } = req.params;
-  try {
-    const data = await Transaction.find({ status: status });
-    res.status(200).json({ state: true, data: data });
-  } catch (err) {
-    res.status(500).json({ state: false, error: err.message });
-  }
-};
+// exports.findByStatus = async (req, res) => {
+//   const { status } = req.params;
+//   try {
+//     const data = await Transaction.find({ status: status });
+//     res.status(200).json({ state: true, data: data });
+//   } catch (err) {
+//     res.status(500).json({ state: false, error: err.message });
+//   }
+// };
 
 exports.findByAmountRange = async (req, res) => {
   const { minAmount, maxAmount } = req.params;
@@ -116,7 +116,7 @@ exports.findByAmountRange = async (req, res) => {
     const min = parseFloat(minAmount);
     const max = parseFloat(maxAmount);
 
-    const data = await Transaction.find({ amount: { $gte: min, $lte: max } });
+    const data = await Transaction.find({ amount: { $gte: min, $lte: max } }).populate("client");
 
     res.status(200).json({ state: true, data: data });
   } catch (err) {
@@ -125,10 +125,36 @@ exports.findByAmountRange = async (req, res) => {
 };
 
 
+// exports.findByStatus = async (req, res) => {
+//   const { userId, status } = req.params;
+//   try {
+    
+//     const data = await Transaction.find({ "client._id": userId, status: status }).populate("client");
+//     if (data.length > 0) {
+//       res.status(200).json({ state: true, data: data });
+//     } else {
+//       res.status(404).json({ state: false, message: "No se encontraron transacciones para el usuario y estado especificados." });
+//     }
+//   } catch (err) {
+//     res.status(500).json({ state: false, error: err.message });
+//   }
+// };
+
+
+// exports.findByStatus = async (req, res) => {
+//   const { id, status } = req.params;
+//   try {
+//     const data = await Transaction.find({ id: id, status: status });
+//     res.status(200).json({ state: true, data: data });
+//   } catch (err) {
+//     res.status(500).json({ state: false, error: err.message });
+//   }
+// };
+
 exports.findByStatus = async (req, res) => {
   const { status } = req.params;
   try {
-    const data = await Transaction.find({ status: status });
+    const data = await Transaction.find({ status: status }).populate("client");
     res.status(200).json({ state: true, data: data });
   } catch (err) {
     res.status(500).json({ state: false, error: err.message });
