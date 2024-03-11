@@ -56,7 +56,7 @@ exports.findByUsername = async (req, res) => {
   const { username } = req.params;
 
   try {
-    // Busca un cliente por nombre de usuario y popula las transacciones
+   
     const client = await Client.findOne({ username: username }).populate("transactions");
 
     if (client) {
